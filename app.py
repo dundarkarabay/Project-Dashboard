@@ -2,13 +2,15 @@ from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
 import scrape_indeed
 import csv
+import os
 
 # Create an instance of Flask
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-# mongo = PyMongo(app, uri="mongodb://heroku_pxmzqrg2:dpp5l24mlb4lqetj4q96d62cjb@ds339968.mlab.com:39968/heroku_pxmzqrg2?retryWrites=false")
-mongo = PyMongo(app, uri="mongodb://localhost:27017/indeed_app")
+mongo_uri = os.getenv('MONGODB_URI', "mongodb://localhost:27017/")
+mongo = PyMongo(app, uri=mongo_uri)
+#mongo = PyMongo(app, uri="mongodb://heroku_qx3g49ns:9u9s6p6efv061gkebdtp68ckoi@ds053597.mlab.com:53597/heroku_qx3g49ns")
 
 # Route to render index.html template using data from Mongo
 @app.route("/")

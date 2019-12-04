@@ -1,6 +1,11 @@
-# Dream Job vs Job Market
+# Who's Hiring and Where Should You Move?
 
-We are building a dashboard that will show you where you can find a specific job in the United States, and how many spots are available. We will then build a dashboard that ranks the most popular jobs, locations, salaries, etc. 
+We built a webpage that scrapes Indeed for job postings, plugs it into mongoDB, pulls the data to build out a map that shows where the jobs are posted, and additional maps/dashboards with income data to help deciede which job is the best to take.
+
+## Contributors:
+* Thuria Abdelaziz
+* Dundar Karabay
+* Jadd Cheng
 
 ## Data Sources:
 * Web-scraping from Indeed

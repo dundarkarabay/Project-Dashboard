@@ -1,1 +1,1 @@
-web: gunicorn job-listings-analysis.app:app
+web: gunicorn app:app
