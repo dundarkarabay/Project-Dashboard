@@ -8,8 +8,8 @@ import os
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-# mongo_uri = os.getenv('mongodb+srv://dundark:12Subat07@cluster0-7agox.mongodb.net/test?retryWrites=true&w=majority', "mongodb://localhost:27017/indeed_app")
-# mongo = PyMongo(app, uri=mongo_uri)
+mongo_uri = os.getenv('mongodb://heroku_qx3g49ns:9u9s6p6efv061gkebdtp68ckoi@ds053597.mlab.com:53597/heroku_qx3g49ns', "mongodb://localhost:27017/indeed_app")
+mongo = PyMongo(app, uri=mongo_uri)
 #mongo = PyMongo(app, uri="mongodb://heroku_qx3g49ns:9u9s6p6efv061gkebdtp68ckoi@ds053597.mlab.com:53597/heroku_qx3g49ns")
 
 # Route to render index.html template using data from Mongo
@@ -17,11 +17,10 @@ app = Flask(__name__)
 def home():
 
     # Find one record of data from the mongo database
-    # postings = mongo.db.collection.find_one()
+    postings = mongo.db.collection.find_one()
 
     # Return template and data
-    # return render_template("index.html", data=postings)
-    return render_template("index.html")
+    return render_template("index.html", data=postings)
 
 @app.route("/dundar")
 def dundar():
@@ -39,31 +38,31 @@ def thuria():
     return render_template("thuria/thuria.html")
 
 # Route that will trigger the scrape function
-# @app.route("/scrape")
-# def scrape():
+@app.route("/scrape")
+def scrape():
 
-#     # Run the scrape function
-#     scraping_data = scrape_indeed.scrape_info()
+    # Run the scrape function
+    scraping_data = scrape_indeed.scrape_info()
 
-#     # Update the Mongo database using update and upsert=True
-#     mongo.db.collection.insert(scraping_data)
+    # Update the Mongo database using update and upsert=True
+    mongo.db.collection.insert(scraping_data)
 
-#     # for data in scraping_data:
-#     #     print(data["location"])
-#     titles = []
-#     locations = []
-#     metadata = {}
-#     for data in scraping_data:
-#         titles.append(data["title"])
-#         locations.append(data["location"])
+    # for data in scraping_data:
+    #     print(data["location"])
+    titles = []
+    locations = []
+    metadata = {}
+    for data in scraping_data:
+        titles.append(data["title"])
+        locations.append(data["location"])
     
-#     metadata["title"] = titles
-#     metadata["location"] = locations
+    metadata["title"] = titles
+    metadata["location"] = locations
 
-#     print(metadata)
-#     # return jsonify(metadata)
-#     # Redirect back to home page
-#     return redirect("/")
+    print(metadata)
+    # return jsonify(metadata)
+    # Redirect back to home page
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
