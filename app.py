@@ -8,7 +8,7 @@ import os
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-mongo_uri = os.getenv('mongodb://heroku_qx3g49ns:9u9s6p6efv061gkebdtp68ckoi@ds053597.mlab.com:53597/heroku_qx3g49ns', "mongodb://localhost:27017/indeed_app")
+mongo_uri = os.getenv('mongodb+srv://dundarkarabay:12Subat07@cluster0-7agox.mongodb.net/test?retryWrites=true&w=majority', "mongodb://localhost:27017/indeed_app")
 mongo = PyMongo(app, uri=mongo_uri)
 #mongo = PyMongo(app, uri="mongodb://heroku_qx3g49ns:9u9s6p6efv061gkebdtp68ckoi@ds053597.mlab.com:53597/heroku_qx3g49ns")
 
