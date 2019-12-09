@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 import time
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 import os
 # In[2]:
 
@@ -33,14 +34,15 @@ import os
 # In[16]:
 #  "CHROMEDRIVER_PATH" : "/app/.chromedriver/bin/chromedriver"
 #  "GOOGLE_CHROME_BIN" : "/app/.apt/usr/bin/google-chrome"    
-chrome_options = webdriver.ChromeOptions()
+options = Options()
 
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument('--disable-gpu')
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--headless')
+options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 
-browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+options.add_argument('--headless')
+options.add_argument('--disable-gpu')
+options.add_argument('--no-sandbox')
+
+browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=options)
 
 # #trying Splinter
 # def init_browser():
@@ -59,7 +61,7 @@ def scrape_info():
         # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
         browser.visit(url)
-        browser.is_text_present('Indeed', wait_time=10)
+        browser.is_text_present('Indeed', wait_time=50)
         
 
         html = browser.html
