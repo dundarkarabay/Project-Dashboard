@@ -53,8 +53,8 @@ browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH
 # In[27]:
 
 def scrape_info():
-    titles = ['Data Engineer', 'Business Analyst','Software Engineer']
-    # titles = ['Data Engineer'] # for testing
+    # titles = ['Data Engineer', 'Business Analyst','Software Engineer']
+    titles = ['Data Engineer'] # for testing
     postings = []
     
     for title in titles:
