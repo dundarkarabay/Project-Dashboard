@@ -5,16 +5,13 @@
 
 
 # Dependencies
-from splinter import Browser
+# from splinter import Browser
 from bs4 import BeautifulSoup as bs
-import requests
-import pymongo
+# import requests
+# import pymongo
 import pandas as pd
 import time
-import os
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-
 
 # In[2]:
 
@@ -34,22 +31,21 @@ from selenium.webdriver.chrome.options import Options
 
 
 # In[16]:
+CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
+    
+chrome_options = webdriver.ChromeOptions()
 
+chrome_options.binary_location = '.apt/usr/bin/google-chrome-stable'
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('headless')
+
+browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
 #trying Splinter
-def init_browser():
-    options = Options()
-
-    options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
-
-    options.add_argument('--headless')
-    options.add_argument('--disable-gpu')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--remote-debugging-port=9222')
-    
-    return webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=options)
-    # executable_path = {"executable_path": "chromedriver"}
-    # return Browser('chrome', **executable_path, headless=False)
+# def init_browser():
+#     executable_path = {"executable_path": "chromedriver"}
+#     return Browser('chrome', **executable_path, headless=False)
 
 # In[27]:
 
@@ -59,7 +55,7 @@ def scrape_info():
     postings = []
     
     for title in titles:
-        browser = init_browser()
+        # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
         browser.visit(url)
         browser.is_text_present('Indeed', wait_time=10)
