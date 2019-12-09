@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup as bs
 import pandas as pd
 import time
 from selenium import webdriver
-
+import os
 # In[2]:
 
 
