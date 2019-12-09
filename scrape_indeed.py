@@ -61,7 +61,7 @@ def scrape_info():
         # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
         browser.get(url)
-        time.sleep(10)
+        # time.sleep(10)
         # browser.is_text_present('Indeed', wait_time=50)
         
 
