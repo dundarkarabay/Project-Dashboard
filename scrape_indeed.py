@@ -5,7 +5,7 @@
 
 
 # Dependencies
-from splinter import Browser
+# from splinter import Browser
 from bs4 import BeautifulSoup as bs
 # import requests
 # import pymongo
@@ -31,16 +31,16 @@ import os
 
 
 # In[16]:
-CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
-    
+#  "CHROMEDRIVER_PATH" : "/app/.chromedriver/bin/chromedriver"
+#  "GOOGLE_CHROME_BIN" : "app/.apt/usr/bin/google-chrome"    
 chrome_options = webdriver.ChromeOptions()
 
-chrome_options.binary_location = '.apt/usr/bin/google-chrome-stable'
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('headless')
 
-browser = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 # #trying Splinter
 # def init_browser():
