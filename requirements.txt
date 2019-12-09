@@ -17,3 +17,4 @@ gunicorn==20.0.4
 splinter==0.11.0
 beautifulsoup4==4.6.0
 requests==2.18.4
+selenium==3.13.0
