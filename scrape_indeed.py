@@ -32,7 +32,7 @@ import os
 
 # In[16]:
 #  "CHROMEDRIVER_PATH" : "/app/.chromedriver/bin/chromedriver"
-#  "GOOGLE_CHROME_BIN" : "app/.apt/usr/bin/google-chrome"    
+#  "GOOGLE_CHROME_BIN" : "/app/.apt/usr/bin/google-chrome"    
 chrome_options = webdriver.ChromeOptions()
 
 chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -56,7 +56,7 @@ def scrape_info():
     postings = []
     
     for title in titles:
-        browser = init_browser()
+        # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
         browser.visit(url)
         browser.is_text_present('Indeed', wait_time=10)
