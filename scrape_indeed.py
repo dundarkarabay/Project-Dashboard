@@ -60,11 +60,13 @@ def scrape_info():
     for title in titles:
         # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
-        browser.visit(url)
-        browser.is_text_present('Indeed', wait_time=50)
+        browser.get(url)
+        time.sleep(10)
+        # browser.is_text_present('Indeed', wait_time=50)
         
 
-        html = browser.html
+        html = browser.page_source
+        # html = browser.html
         soup = bs(html, 'html.parser')
 
         jobs = soup.find('div', id="refineresults")
