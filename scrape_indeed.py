@@ -58,14 +58,14 @@ browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH
 
 def scrape_info():
     # titles = ['Data Engineer', 'Business Analyst','Software Engineer']
-    titles = ['Data Engineer'] # for testing
+    titles = ['Business Analyst'] # for testing
     postings = []
     
     for title in titles:
         # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
         browser.get(url)
-        time.sleep(30)
+        # time.sleep(30)
         # browser.is_text_present('Indeed', wait_time=50)
         
 
