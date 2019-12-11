@@ -3,19 +3,16 @@ from flask_pymongo import PyMongo
 import scrape_indeed
 import csv
 import os
-# from datetime import datetime
-# now = datetime.now()
-# current_time = now. strftime("%D/%H/%M/%S")
-# db_name = f"dundar/{current_time}"
-# db_name = db_name.replace("/", "_")
+from datetime import datetime
+now = datetime.now()
+current_time = now. strftime("%D/%H/%M/%S")
+db_name = f"dundar/{current_time}"
+db_name = db_name.replace("/", "_")
 # Create an instance of Flask
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-# mongo_uri = os.getenv("mongodb+srv://dundarkarabay:12Subat07@cluster0-7agox.mongodb.net/test?retryWrites=true&w=majority", "mongodb://localhost:27017/indeed_app")
-# mongo = PyMongo(app, uri="mongodb+srv://dundarkarabay:12Subat07@cluster0-7agox.mongodb.net/test?retryWrites=true&w=majority")
-mongo = PyMongo(app, uri="mongodb://dundarkarabay:12Subat07@cluster0-shard-00-00-7agox.mongodb.net:27017,cluster0-shard-00-01-7agox.mongodb.net:27017,cluster0-shard-00-02-7agox.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
-#mongo = PyMongo(app, uri="mongodb://heroku_qx3g49ns:9u9s6p6efv061gkebdtp68ckoi@ds053597.mlab.com:53597/heroku_qx3g49ns")
+mongo = PyMongo(app, uri=f"mongodb://dundarkarabay:12Subat07@cluster0-shard-00-00-7agox.mongodb.net:27017,cluster0-shard-00-01-7agox.mongodb.net:27017,cluster0-shard-00-02-7agox.mongodb.net:27017/{db_name}?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
 
 # Route to render index.html template using data from Mongo
 @app.route("/")
@@ -65,9 +62,9 @@ def scrape():
     metadata["location"] = locations
 
     print(metadata)
-    # return jsonify(metadata)
+    return jsonify(metadata)
     # Redirect back to home page
-    return redirect("/")
+    # return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)
