@@ -50,7 +50,7 @@ def scrape():
     scraping_data = scrape_indeed.scrape_info()
 
     # Update the Mongo database using update and upsert=True
-    # mongo.db.collection.insert(scraping_data)
+    mongo.db.collection.insert(scraping_data)
 
     # for data in scraping_data:
     #     print(data["location"])
