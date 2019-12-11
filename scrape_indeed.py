@@ -8,7 +8,7 @@
 # from splinter import Browser
 from bs4 import BeautifulSoup as bs
 # import requests
-# import pymongo
+import pymongo
 import pandas as pd
 import time
 from selenium import webdriver
@@ -49,7 +49,11 @@ browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH
 #     executable_path = {"executable_path": "/tmp/build_95e51cf82b0baa47bc15369d37eaa65f/.chromedriver/bin/chromedriver"}
 #     # executable_path = {"executable_path": "chromedriver"}
 #     return Browser('chrome', **executable_path, headless=False)
-
+    # options = Options()
+    # options.add_argument('--headless')
+    # options.add_argument('--disable-gpu')
+    # options.add_argument('--no-sandbox')
+    # return webdriver.Chrome(executable_path="chromedriver.exe", chrome_options=options)
 # In[27]:
 
 def scrape_info():
@@ -61,7 +65,7 @@ def scrape_info():
         # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
         browser.get(url)
-        time.sleep(200)
+        time.sleep(30)
         # browser.is_text_present('Indeed', wait_time=50)
         
 

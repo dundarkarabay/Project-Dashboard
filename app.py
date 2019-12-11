@@ -54,17 +54,17 @@ def scrape():
 
     # for data in scraping_data:
     #     print(data["location"])
-    titles = []
-    locations = []
-    metadata = {}
-    for data in scraping_data:
-        titles.append(data["title"])
-        locations.append(data["location"])
+    # titles = []
+    # locations = []
+    # metadata = {}
+    # for data in scraping_data:
+    #     titles.append(data["title"])
+    #     locations.append(data["location"])
     
-    metadata["title"] = titles
-    metadata["location"] = locations
+    # metadata["title"] = titles
+    # metadata["location"] = locations
 
-    print(metadata)
+    # print(metadata)
     # return jsonify(metadata)
     # Redirect back to home page
     return redirect("/")
