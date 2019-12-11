@@ -5,15 +5,15 @@
 
 
 # Dependencies
-# from splinter import Browser
+from splinter import Browser
 from bs4 import BeautifulSoup as bs
 # import requests
 import pymongo
 import pandas as pd
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-import os
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
+# import os
 # In[2]:
 
 
@@ -34,21 +34,21 @@ import os
 # In[16]:
 #  "CHROMEDRIVER_PATH" : "/app/.chromedriver/bin/chromedriver"
 #  "GOOGLE_CHROME_BIN" : "/app/.apt/usr/bin/google-chrome"    
-options = Options()
+# options = Options()
 
-options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+# options.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
 
-options.add_argument('--headless')
-options.add_argument('--disable-gpu')
-options.add_argument('--no-sandbox')
+# options.add_argument('--headless')
+# options.add_argument('--disable-gpu')
+# options.add_argument('--no-sandbox')
 
-browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=options)
+# browser = webdriver.Chrome(executable_path=str(os.environ.get('CHROMEDRIVER_PATH')), chrome_options=options)
 
 # #trying Splinter
-# def init_browser():
-#     executable_path = {"executable_path": "/tmp/build_95e51cf82b0baa47bc15369d37eaa65f/.chromedriver/bin/chromedriver"}
-#     # executable_path = {"executable_path": "chromedriver"}
-#     return Browser('chrome', **executable_path, headless=False)
+def init_browser():
+    executable_path = {"executable_path": "CHROMEDRIVER_PATH"}
+    # executable_path = {"executable_path": "chromedriver"}
+    return Browser('chrome', **executable_path, headless=False)
     # options = Options()
     # options.add_argument('--headless')
     # options.add_argument('--disable-gpu')
@@ -62,15 +62,15 @@ def scrape_info():
     postings = []
     
     for title in titles:
-        # browser = init_browser()
+        browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
-        browser.get(url)
-        time.sleep(10)
-        # browser.is_text_present('Indeed', wait_time=50)
+        browser.visit(url)
+        # time.sleep(10)
+        browser.is_text_present('Indeed', wait_time=10)
         
 
-        html = browser.page_source
-        # html = browser.html
+        # html = browser.page_source    # When using selenium
+        html = browser.html             # When using splinter
         soup = bs(html, 'html.parser')
 
         jobs = soup.find('div', id="refineresults")
