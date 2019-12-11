@@ -64,7 +64,8 @@ def scrape_info():
     for title in titles:
         # browser = init_browser()
         url = 'https://www.indeed.com/jobs?q={}&l='.format(title)
-        browser.visit(url)
+        browser.get(url)  # When using selenium
+        # browser.visit(url)  # When using splinter
         time.sleep(10)
         # browser.is_text_present('Indeed', wait_time=10)
         
