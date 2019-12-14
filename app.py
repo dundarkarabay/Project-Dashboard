@@ -3,7 +3,6 @@ from flask_pymongo import PyMongo
 import scrape_indeed
 import csv
 import os
-import pymongo
 
 # Create an instance of Flask
 app = Flask(__name__)
@@ -44,11 +43,13 @@ def scrape():
         mongo.db.collection.update({}, dictionary, upsert=True)
 
         # Redirect back to home page
-        return render_template("index.html", notification="Scraping has been succesfully exacuted and the results have been saved into Atlas mongoDB! Please visit our visualization pages using the navbar.")
+        return render_template("index.html", notification="Scraping has been succesfully executed and the results have been saved into Atlas mongoDB! Please visit visualization pages using the navbar.")
     except Exception as e:
         errorMessage = {}
         errorMessage["Message"] = "Please go back to the homepage and keep trying until scraping is successfully executed!"
         return jsonify(errorMessage)
+
+import pymongo
 
 myclient = pymongo.MongoClient("mongodb://dundarkarabay:12Subat07@cluster0-shard-00-00-7agox.mongodb.net:27017,cluster0-shard-00-01-7agox.mongodb.net:27017,cluster0-shard-00-02-7agox.mongodb.net:27017/job_relocation?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
 mydb = myclient["job_relocation"]
