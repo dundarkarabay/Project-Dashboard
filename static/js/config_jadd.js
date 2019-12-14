@@ -1,3 +1,2 @@
 // API key
-// 2019-11-17
-const API_KEY = "pk.eyJ1IjoiamxjYXR4NTEyIiwiYSI6ImNrMnI5dzIyZzA3YWUzY3ByZXk5dDFoZHkifQ.bS4mc_w1ykIHh9eYgYR4uQ";
+const API_KEY = "pk.eyJ1IjoibWFubGFyYSIsImEiOiJjamtnd2R3ZW4wbWlwM3FxZ3BoY2JkNm1qIn0.NQ7yhFgYEP0fqdHkT9c6-Q";

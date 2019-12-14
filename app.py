@@ -3,26 +3,18 @@ from flask_pymongo import PyMongo
 import scrape_indeed
 import csv
 import os
-# from datetime import datetime
-# now = datetime.now()
-# current_time = now. strftime("%D/%H/%M/%S")
-# db_name = f"job/app/{current_time}"
-# db_name = db_name.replace("/", "_")
+import pymongo
+
 # Create an instance of Flask
 app = Flask(__name__)
 
 # Use PyMongo to establish Mongo connection
-mongo = PyMongo(app, uri=f"mongodb://dundarkarabay:12Subat07@cluster0-shard-00-00-7agox.mongodb.net:27017,cluster0-shard-00-01-7agox.mongodb.net:27017,cluster0-shard-00-02-7agox.mongodb.net:27017/job_relocation?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
+mongo = PyMongo(app, uri="mongodb://dundarkarabay:12Subat07@cluster0-shard-00-00-7agox.mongodb.net:27017,cluster0-shard-00-01-7agox.mongodb.net:27017,cluster0-shard-00-02-7agox.mongodb.net:27017/job_relocation?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
 
 # Route to render index.html template using data from Mongo
 @app.route("/")
 def home():
-
-    # Find one record of data from the mongo database
-    postings = mongo.db.collection.find_one()
-
-    # Return template and data
-    return render_template("index.html", data=postings)
+    return render_template("index.html")
 
 @app.route("/dundar")
 def dundar():
@@ -45,31 +37,29 @@ def scrape():
     try:
         # Run the scrape function
         scraping_data = scrape_indeed.scrape_info()
+        dictionary = {"Scraped Data" : scraping_data}
 
         # Update the Mongo database using update and upsert=True
-        mongo.db.collection.insert(scraping_data)
+        # mongo.db.collection.insert(scraping_data)
+        mongo.db.collection.update({}, dictionary, upsert=True)
 
-        # for data in scraping_data:
-        #     print(data["location"])
-        titles = []
-        locations = []
-        metadata = {}
-        for data in scraping_data:
-            titles.append(data["title"])
-            locations.append(data["location"])
-        
-        metadata["title"] = titles
-        metadata["location"] = locations
-
-        # print(metadata)
-        # return jsonify(metadata)
         # Redirect back to home page
-        return redirect("/")
+        return render_template("index.html", notification="Scraping has been succesfully exacuted and the results have been saved into Atlas mongoDB! Please visit our visualization pages using the navbar.")
     except Exception as e:
         errorMessage = {}
         errorMessage["Message"] = "Please go back to the homepage and keep trying until scraping is successfully executed!"
         return jsonify(errorMessage)
 
+myclient = pymongo.MongoClient("mongodb://dundarkarabay:12Subat07@cluster0-shard-00-00-7agox.mongodb.net:27017,cluster0-shard-00-01-7agox.mongodb.net:27017,cluster0-shard-00-02-7agox.mongodb.net:27017/job_relocation?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
+mydb = myclient["job_relocation"]
+mycol = mydb["collection"]
+for doc in mycol.find():
+    dictionary2 = doc
+output = {"Scraped Data" : dictionary2["Scraped Data"]}
+
+@app.route("/job_distribution_data")
+def job_distribution_data():
+    return jsonify(output)
 
 if __name__ == "__main__":
     app.run(debug=True)
