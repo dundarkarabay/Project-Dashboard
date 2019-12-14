@@ -8,10 +8,10 @@ import os
 
 # trying Splinter
 def init_browser():
-    chromedriver = os.getenv(str(os.environ.get('CHROMEDRIVER_PATH')), "chromedriver.exe")
-    executable_path = {"executable_path": chromedriver}
+    # chromedriver = os.getenv(str(os.environ.get('CHROMEDRIVER_PATH')), "chromedriver.exe")
+    # executable_path = {"executable_path": chromedriver}
     # executable_path = {"executable_path": "chromedriver.exe"}   # When running locally
-    # executable_path = {"executable_path": str(os.environ.get('CHROMEDRIVER_PATH'))} # When running on heroku
+    executable_path = {"executable_path": str(os.environ.get('CHROMEDRIVER_PATH'))} # When running on heroku
     return Browser('chrome', **executable_path, headless=False)
 
 def scrape_info():
